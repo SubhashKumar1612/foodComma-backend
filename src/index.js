@@ -2,7 +2,9 @@ const express=require("express")
 const bodyParser=require("body-parser")
 const serverConfig=require('./config/serverConfig')
 const connectDB=require("./config/dbConfig");
-const User=require("./schema/userSchema")
+const User=require("./schema/userSchema");
+const userRouter = require("./routes/userRoute");
+const cartRouter = require("./routes/cartRoute");
 
 const app=express();
 
@@ -10,6 +12,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.text())
 app.use(bodyParser.urlencoded({extended:true}))
 
+app.use('/users',userRouter)
+
+app.use('/carts',cartRouter)
 app.post('/ping',(req,res)=>{
     console.log(req.body)
     return res.json({message:'ping'})
