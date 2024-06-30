@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use('/users',userRouter)
 
 app.use('/carts',cartRouter)
+
 app.post('/ping',(req,res)=>{
     console.log(req.body)
     return res.json({message:'ping'})
