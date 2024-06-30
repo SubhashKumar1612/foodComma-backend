@@ -2,15 +2,14 @@ const userRepository = require("../repositories/userRepository")
 //const { create } = require("../schema/userSchema")
 const UserService = require("../services/userservice")
 
-const userService=new UserService(new userRepository());
-//console.log(userService)
 
 async function createUser(req,res){
     console.log(" create user controller called")
     console.log(req.body)
 
     //todo register the user
-    //const userService=new userService(new userRepository());
+    const userService=new UserService(new userRepository());
+    //console.log(userService)
     
    try{
     const response=await userService.registerUser(req.body);
