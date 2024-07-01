@@ -1,18 +1,14 @@
-const userRepository = require("../repositories/userRepository")
-//const { create } = require("../schema/userSchema")
-const UserService = require("../services/userservice")
+//const userRepository = require("../repositories/userRepository")
+const {registerUser}=require("../services/userservice");
 
 
 async function createUser(req,res){
     console.log(" create user controller called")
     console.log(req.body)
 
-    //todo register the user
-    const userService=new UserService(new userRepository());
-    //console.log(userService)
-    
+    //todo register the user 
    try{
-    const response=await userService.registerUser(req.body);
+    const response=await registerUser(req.body);
 
     return res.json({
         message:'successfully registered the user',
@@ -22,7 +18,7 @@ async function createUser(req,res){
     })
    }catch(error){
         return res.json({
-            message:error.reason,
+            message:"usercontroller has an error",
             success:false,
             data:{},
             error:error

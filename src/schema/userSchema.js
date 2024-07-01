@@ -1,5 +1,5 @@
 const mongoose=require("mongoose")
-
+const bcrypt=require("bcrypt")
 const userSchema=new mongoose.Schema({
     firstName:{
         type:String,
@@ -37,6 +37,13 @@ const userSchema=new mongoose.Schema({
     }
 },{
     timestamps:true
+});
+
+userSchema.pre('save', async function(){
+    // here u can modify your user befor it is saved in mongodb
+    const hashedPassword=await bcrypt.hash(this.password,10);
+    this.password=hashedPassword;
 })
+
 const User=mongoose.model("User",userSchema)
 module.exports=User;

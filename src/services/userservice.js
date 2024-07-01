@@ -1,18 +1,12 @@
 //const { createUser } = require("../controllers/UserController");
+const {findUser, createUser}=require("../repositories/userRepository");
 
-class UserService{
-
-    constructor(userRepository){
-        // in the argument we will expect userRepository object
-        this.userRepository=userRepository;
-    }
-
-    async registerUser(userDetails){
+    async function registerUser(userDetails){
         console.log("hiting service layer")
         //it will create a brand new user in the db
 
         //1. we need to check if the user with this email and mobile number already exits or not
-        const user=await this.userRepository.findUser({
+        const user=await findUser({
             email:userDetails.email,
             mobileNumber:userDetails.mobileNumber
         });
@@ -22,7 +16,7 @@ class UserService{
         }
 
         // 2. if not then create the user in the database
-        const newUser=await this.userRepository.createUser({
+        const newUser=await createUser({
             email:userDetails.email,
             password:userDetails.password,
             firstName:userDetails.firstName,
@@ -36,5 +30,6 @@ class UserService{
         //3. return the details of created user
         return newUser;
     }
+module.exports={
+    registerUser
 }
-module.exports=UserService;
