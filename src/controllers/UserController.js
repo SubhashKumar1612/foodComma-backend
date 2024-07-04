@@ -1,7 +1,7 @@
 //const userRepository = require("../repositories/userRepository")
 const {registerUser}=require("../services/userservice");
 
-
+console.log(" create user controller called")
 async function createUser(req,res){
     console.log(" create user controller called")
     console.log(req.body)

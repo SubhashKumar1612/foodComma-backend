@@ -1,6 +1,7 @@
 const User=require('../schema/userSchema')
 
     async function findUser(parameters){
+      console.log("findUser")
         try{
             const response=await User.findOne({...parameters})
             return response;
